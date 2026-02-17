@@ -1,20 +1,29 @@
 public class PalindromeCheckerApp {
 
     /**
-    * Application entry point.
-    *
-    *This is the first method executed by the JVM
-
+     * Application entry point.
+     * <p>
+     * This is the first method executed by the JVM
+     * <p>
      * when the program starts.
      *
      * @param args Command-line arguments
      */
 
-    public static void main(String[] args) {
-    System.out.println("Welcome to Palindrome Checker App");
-        System.out.println("Version : 1.0");
-        System.out.println("System initialised Successful");
+
+        public static void main(String[] args) {
+
+            String word = "madam";
+            String reversed = "";
+
+            for (int i = word.length() - 1; i >= 0; i--) {
+                reversed = reversed + word.charAt(i);
+            }
+            if (word.equals(reversed)) {
+                System.out.println(word + " is a Palindrome.");
+            } else {
+                System.out.println(word + " is NOT a Palindrome.");
+            }
+        }
     }
 
-
-}
