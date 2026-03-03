@@ -24,7 +24,7 @@ public class PalindromeCheckerApp {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("=== Palindrome Checker App (UC9 - Recursion) ===");
-        System.out.print("Enter a string: ");
+        System.out.print("Enter a  string: ");
         String input = sc.nextLine();
 
         boolean result = isPalindrome(input, 0, input.length() - 1);
