@@ -1,40 +1,34 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
-    // Recursive method to check palindrome
-    public static boolean isPalindrome(String str, int start, int end) {
-
-        // Base Condition: If start crosses or meets end
-        if (start >= end) {
-            return true;
-        }
-
-        // If characters at start and end do not match
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call
-        return isPalindrome(str, start + 1, end - 1);
-    }
-
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        Stack<Character> stack = new Stack<>();
 
-        System.out.println("=== Palindrome Checker App (UC9 - Recursion) ===");
-        System.out.print("Enter a  string: ");
-        String input = sc.nextLine();
+        System.out.println("Enter a string to check if it is a palindrome:");
+        String input = scanner.nextLine();
 
-        boolean result = isPalindrome(input, 0, input.length() - 1);
+        // Push characters into the stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
 
-        if (result) {
+        // Pop characters to create reversed string
+        String reversed = "";
+        while (!stack.isEmpty()) {
+            reversed = reversed + stack.pop();
+        }
+
+        // Compare original and reversed string
+        if (input.equals(reversed)) {
             System.out.println("The given string is a Palindrome.");
         } else {
             System.out.println("The given string is NOT a Palindrome.");
         }
 
-        sc.close();
+        scanner.close();
     }
 }
