@@ -1,62 +1,31 @@
 import java.util.Scanner;
+import java.util.Stack;
 
-class Node {
-    char data;
-    Node next;
+// PalindromeChecker class (Encapsulates palindrome logic)
+class PalindromeChecker {
 
-    Node(char data) {
-        this.data = data;
-        this.next = null;
+    // Method to check palindrome
+    public boolean checkPalindrome(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+        // Push characters into stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
+
+        // Build reversed string using stack
+        String reversed = "";
+        while (!stack.isEmpty()) {
+            reversed += stack.pop();
+        }
+
+        // Compare original and reversed
+        return input.equals(reversed);
     }
 }
 
 public class PalindromeCheckerApp {
-
-    // Function to reverse a linked list
-    public static Node reverse(Node head) {
-        Node prev = null;
-        Node current = head;
-        Node next = null;
-
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-
-        return prev;
-    }
-
-    // Function to check palindrome
-    public static boolean isPalindrome(Node head) {
-        if (head == null || head.next == null)
-            return true;
-
-        Node slow = head;
-        Node fast = head;
-
-        // Find middle using fast and slow pointers
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        // Reverse second half
-        Node secondHalf = reverse(slow);
-        Node firstHalf = head;
-
-        // Compare both halves
-        while (secondHalf != null) {
-            if (firstHalf.data != secondHalf.data) {
-                return false;
-            }
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
-        }
-
-        return true;
-    }
 
     public static void main(String[] args) {
 
@@ -65,23 +34,14 @@ public class PalindromeCheckerApp {
         System.out.println("Enter a string to check if it is a palindrome:");
         String input = scanner.nextLine();
 
-        // Convert string to linked list
-        Node head = null, tail = null;
+        // Create object of PalindromeChecker
+        PalindromeChecker checker = new PalindromeChecker();
 
-        for (int i = 0; i < input.length(); i++) {
-            Node newNode = new Node(input.charAt(i));
+        // Call method
+        boolean result = checker.checkPalindrome(input);
 
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                tail = newNode;
-            }
-        }
-
-        // Check palindrome
-        if (isPalindrome(head)) {
+        // Print result
+        if (result) {
             System.out.println("The given string is a Palindrome.");
         } else {
             System.out.println("The given string is NOT a Palindrome.");
